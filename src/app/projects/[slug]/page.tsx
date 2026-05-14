@@ -105,23 +105,28 @@ export default async function ProjectPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* Hero visual placeholder */}
+        {/* Hero visual visual */}
         <section className="mb-16">
           <div
-            className="aspect-[16/9] rounded-2xl border border-border overflow-hidden flex items-center justify-center"
+            className="aspect-[16/9] rounded-2xl border border-border overflow-hidden flex items-center justify-center bg-bg-secondary"
             style={{
-              background: `linear-gradient(135deg, ${project.color}10, ${project.color}05, var(--bg-secondary))`,
+              background: !project.image 
+                ? `linear-gradient(135deg, ${project.color}10, ${project.color}05, var(--bg-secondary))`
+                : undefined,
             }}
           >
-            <div className="text-center p-8">
-              <div
-                className="w-20 h-20 rounded-2xl mx-auto mb-4 opacity-20"
-                style={{ backgroundColor: project.color }}
+            {project.image ? (
+              <img
+                src={project.image}
+                alt={`${project.title} screenshot`}
+                className="w-full h-full object-cover"
               />
-              <p className="text-text-tertiary text-sm">
-                Project visual / demo screenshot
-              </p>
-            </div>
+            ) : (
+              <div className="text-center opacity-20">
+                <div className="text-6xl mb-4">🖼️</div>
+                <p className="text-sm font-medium tracking-wider uppercase">Visual Coming Soon</p>
+              </div>
+            )}
           </div>
         </section>
 

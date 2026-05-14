@@ -31,15 +31,28 @@ function ProjectCard({ project }: { project: ProjectMeta }) {
       >
         {/* Visual header */}
         <div
-          className="relative aspect-[16/9] bg-bg-tertiary flex items-center justify-center"
+          className="relative aspect-[16/9] bg-bg-tertiary flex items-center justify-center overflow-hidden"
           style={{
-            background: `linear-gradient(135deg, ${project.color}08, ${project.color}04)`,
+            background: !project.image 
+              ? `linear-gradient(135deg, ${project.color}08, ${project.color}04)`
+              : undefined,
           }}
         >
-          <div
-            className="w-20 h-20 rounded-xl opacity-15"
-            style={{ backgroundColor: project.color }}
-          />
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          ) : (
+            <div
+              className="w-20 h-20 rounded-xl opacity-15"
+              style={{ backgroundColor: project.color }}
+            />
+          )}
+          
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
+          
           <div className="absolute top-3 left-3 flex items-center gap-2">
             <Badge variant="category">{categoryLabels[project.category]}</Badge>
             {project.tier === "featured" && (

@@ -123,7 +123,8 @@
   --color-border: var(--border);
   --color-border-subtle: var(--border-subtle);
   --color-border-accent: var(--border-accent);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-space-mono);
   --font-mono: var(--font-jetbrains-mono);
 }
 
@@ -146,7 +147,7 @@ html {
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-manrope), system-ui, -apple-system, sans-serif;
   line-height: 1.7;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -157,13 +158,14 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  font-weight: 600;
+  font-family: var(--font-space-mono), monospace;
+  line-height: 1.1;
+  letter-spacing: -0.04em; /* Very tight spacing as requested in reference */
+  font-weight: 700;
 }
 
-h1 { letter-spacing: -0.04em; }
-h2 { letter-spacing: -0.03em; }
+h1 { letter-spacing: -0.05em; }
+h2 { letter-spacing: -0.04em; }
 
 p {
   color: var(--text-secondary);
@@ -264,3 +266,28 @@ a:hover {
   0% { transform: translateX(-25%); }
   100% { transform: translateX(0%); }
 }
+
+/* ============================================
+   Animated Theme Toggle View Transition
+   ============================================ */
+
+/* Sync the transition group lifetime with our JS animation duration */
+::view-transition-group(root) {
+  animation-duration: var(--magicui-theme-toggle-vt-duration, 0ms);
+}
+
+/* Kill the default cross-fade so we get a clean clip reveal instead */
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  z-index: 1;          /* Old theme sits on top initially */
+}
+
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  z-index: 9999;       /* New theme paints above old — but is clipped */
+  /* Start fully collapsed; JS animation expands the clip-path */
+  clip-path: var(--magicui-theme-vt-clip-from, circle(0px at 50% 50%));
+}
+

@@ -12,6 +12,7 @@ export interface ProjectMeta {
   githubUrl?: string;
   liveUrl?: string;
   description: string;
+  image?: string;
 }
 
 export const categoryLabels: Record<string, string> = {
@@ -41,6 +42,7 @@ export const projects: ProjectMeta[] = [
     githubUrl: "https://github.com",
     description:
       "A desktop-native API key manager built with Tauri and Rust. Features zero-knowledge encryption where keys never leave the device, .env file synchronization with local projects, and a project-first workspace architecture.",
+    image: "/vaultic-hero.png",
   },
   {
     slug: "medsage",
@@ -60,6 +62,7 @@ export const projects: ProjectMeta[] = [
     githubUrl: "https://github.com",
     description:
       "A multi-agent AI system for medical diagnosis powered by CrewAI. Features voice interaction, prescription image analysis via computer vision, and automated PDF report generation with explainable AI reasoning.",
+    image: "/medsage-hero.png",
   },
   {
     slug: "keynest",
@@ -79,6 +82,7 @@ export const projects: ProjectMeta[] = [
     githubUrl: "https://github.com",
     description:
       "A progressive web app for managing API keys with zero-knowledge encryption. Includes an AI-powered API Finder that uses Claude to discover relevant APIs based on natural language descriptions.",
+    image: "/keynest-hero.png",
   },
   {
     slug: "pdf-qa-agent",

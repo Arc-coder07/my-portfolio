@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SectionReveal } from "@/components/shared/SectionReveal";
 import { Badge } from "@/components/shared/Badge";
 import { getFeaturedProjects, categoryLabels } from "@/lib/projects";
+import { SpotlightCard } from "@/components/shared/SpotlightCard";
 
 export function FeaturedProjects() {
   const featured = getFeaturedProjects();
@@ -43,45 +43,54 @@ export function FeaturedProjects() {
           {featured.map((project, index) => (
             <SectionReveal key={project.slug} delay={index * 0.1}>
               <Link href={`/projects/${project.slug}`}>
-                <motion.article
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.2 }}
-                  className="group relative grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-2xl border border-border bg-bg-secondary overflow-hidden hover:border-border-accent hover:shadow-lg transition-all duration-300"
-                >
+                <SpotlightCard className="group relative grid grid-cols-1 lg:grid-cols-2 gap-0 hover:border-border-accent hover:shadow-lg transition-all duration-300">
                   {/* Project Visual */}
                   <div
-                    className="relative aspect-[16/10] lg:aspect-auto bg-bg-tertiary flex items-center justify-center overflow-hidden"
+                    className="relative aspect-[16/10] lg:aspect-auto bg-bg-tertiary flex items-center justify-center overflow-hidden border-b lg:border-b-0 lg:border-r border-border"
                     style={{
-                      background: `linear-gradient(135deg, ${project.color}10, ${project.color}05)`,
+                      background: !project.image 
+                        ? `linear-gradient(135deg, ${project.color}10, ${project.color}05)`
+                        : undefined,
                     }}
                   >
-                    {/* Placeholder visual — geometric shapes */}
-                    <div className="relative w-full h-full flex items-center justify-center">
-                      <div
-                        className="w-32 h-32 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity"
-                        style={{ backgroundColor: project.color }}
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div
-                        className="absolute w-24 h-24 rounded-xl opacity-15 rotate-12 group-hover:rotate-6 transition-transform"
-                        style={{ backgroundColor: project.color }}
-                      />
-                      <div
-                        className="absolute w-16 h-16 rounded-lg opacity-10 -rotate-12 group-hover:-rotate-6 transition-transform"
-                        style={{ backgroundColor: project.color }}
-                      />
-                      {/* Project title overlay */}
-                      <span
-                        className="absolute text-5xl font-black opacity-[0.06] select-none"
-                        style={{ color: project.color }}
-                      >
-                        {project.title}
-                      </span>
-                    </div>
+                    ) : (
+                      /* Placeholder visual — geometric shapes */
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        <div
+                          className="w-32 h-32 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity"
+                          style={{ backgroundColor: project.color }}
+                        />
+                        <div
+                          className="absolute w-24 h-24 rounded-xl opacity-15 rotate-12 group-hover:rotate-6 transition-transform"
+                          style={{ backgroundColor: project.color }}
+                        />
+                        <div
+                          className="absolute w-16 h-16 rounded-lg opacity-10 -rotate-12 group-hover:-rotate-6 transition-transform"
+                          style={{ backgroundColor: project.color }}
+                        />
+                        {/* Project title overlay */}
+                        <span
+                          className="absolute text-5xl font-black opacity-[0.06] select-none"
+                          style={{ color: project.color }}
+                        >
+                          {project.title}
+                        </span>
+                      </div>
+                    )}
 
                     {/* Category badge */}
-                    <div className="absolute top-4 left-4">
+                    <div className="absolute top-4 left-4 z-10">
                       <Badge variant="category">{categoryLabels[project.category]}</Badge>
                     </div>
+                    
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
 
                   {/* Project Info */}
@@ -119,7 +128,7 @@ export function FeaturedProjects() {
                       <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </div>
                   </div>
-                </motion.article>
+                </SpotlightCard>
               </Link>
             </SectionReveal>
           ))}

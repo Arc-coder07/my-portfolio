@@ -1,6 +1,7 @@
 "use client";
 
 import { SectionReveal } from "@/components/shared/SectionReveal";
+import { TextReveal } from "@/components/shared/TextReveal";
 import { Cpu, Layers, Workflow, Lightbulb } from "lucide-react";
 
 const philosophyItems = [
@@ -39,9 +40,9 @@ export function PhilosophySection() {
             <span className="text-accent text-sm font-semibold uppercase tracking-wider">
               Philosophy
             </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
+            <TextReveal as="h2" className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-text-primary" delay={0.1}>
               How I think about building
-            </h2>
+            </TextReveal>
             <p className="mt-3 text-text-secondary max-w-lg mx-auto">
               The principles that guide every technical decision and product I create.
             </p>
