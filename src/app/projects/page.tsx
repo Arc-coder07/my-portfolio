@@ -138,7 +138,7 @@ export default function ProjectsPage() {
                 onClick={() => setActiveCategory(cat.value)}
                 className={`px-4 py-2 text-sm font-medium rounded-lg transition-all cursor-pointer ${
                   activeCategory === cat.value
-                    ? "bg-accent text-white shadow-sm"
+                    ? "bg-accent text-[#ffffff] shadow-sm"
                     : "bg-bg-secondary text-text-secondary hover:text-text-primary hover:bg-bg-tertiary border border-border"
                 }`}
               >

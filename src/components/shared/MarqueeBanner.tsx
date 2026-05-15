@@ -29,7 +29,7 @@ export function MarqueeBanner({
 
         {/* Banner 1 - Tilted down, moving left */}
         <div
-          className="absolute w-[500vw] left-[-200vw] flex bg-accent text-white py-3 shadow-lg shadow-accent/20 z-10 hover:bg-accent-hover transition-colors duration-300"
+          className="absolute w-[500vw] left-[-200vw] flex bg-accent text-[#ffffff] py-3 shadow-lg shadow-accent/20 z-10 hover:bg-accent-hover transition-colors duration-300"
           style={{ transform: "rotate(-2deg)" }}
         >
           <div
