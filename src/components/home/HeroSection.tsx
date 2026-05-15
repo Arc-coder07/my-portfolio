@@ -111,12 +111,8 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center gap-4"
+            className="flex items-center"
           >
-            <span className="text-sm font-semibold tracking-wider text-text-primary uppercase">
-              Amarnadh P B
-            </span>
-
             {/* Status Pill — "Open to work" */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}

@@ -88,7 +88,7 @@ export function Navbar() {
             {/* Resume CTA (desktop only) */}
             <Link
               href="/contact"
-              className="hidden md:inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#ffffff] bg-accent hover:bg-accent-hover rounded-lg transition-all hover:shadow-[var(--shadow-glow)]"
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-accent hover:bg-accent-hover rounded-lg transition-all hover:shadow-[var(--shadow-glow)]"
             >
               Get in Touch
             </Link>
@@ -142,7 +142,7 @@ export function Navbar() {
               })}
               <Link
                 href="/contact"
-                className="mt-2 px-4 py-3 text-sm font-medium text-[#ffffff] bg-accent hover:bg-accent-hover rounded-lg text-center transition-all"
+                className="mt-2 px-4 py-3 text-sm font-medium text-white bg-accent hover:bg-accent-hover rounded-lg text-center transition-all"
               >
                 Get in Touch
               </Link>

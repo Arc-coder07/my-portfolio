@@ -105,6 +105,7 @@
    TAILWIND THEME — Exposing tokens
    ============================================ */
 
+/* stylelint-disable-next-line at-rule-no-unknown */
 @theme {
   --color-background: var(--bg-primary);
   --color-foreground: var(--text-primary);
@@ -132,54 +133,56 @@
    BASE STYLES
    ============================================ */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-manrope), system-ui, -apple-system, sans-serif;
-  line-height: 1.7;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-manrope), system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 
-/* ============================================
-   TYPOGRAPHY
-   ============================================ */
+  /* ============================================
+     TYPOGRAPHY
+     ============================================ */
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-primary);
-  font-family: var(--font-space-mono), monospace;
-  line-height: 1.1;
-  letter-spacing: -0.04em; /* Very tight spacing as requested in reference */
-  font-weight: 700;
-}
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-family: var(--font-space-mono), monospace;
+    line-height: 1.1;
+    letter-spacing: -0.04em; /* Very tight spacing as requested in reference */
+    font-weight: 700;
+  }
 
-h1 { letter-spacing: -0.05em; }
-h2 { letter-spacing: -0.04em; }
+  h1 { letter-spacing: -0.05em; }
+  h2 { letter-spacing: -0.04em; }
 
-p {
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
+  p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
 
-a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
+  a:where(:not([class])) {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
 
-a:hover {
-  color: var(--accent-hover);
+  a:where(:not([class])):hover {
+    color: var(--accent-hover);
+  }
 }
 
 /* ============================================
