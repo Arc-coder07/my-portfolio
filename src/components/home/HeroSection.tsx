@@ -10,6 +10,7 @@ import { BlueprintGrid } from "@/components/shared/BlueprintGrid";
 import { FloatingAsterisks } from "@/components/shared/FloatingAsterisks";
 import { TextScramble } from "@/components/shared/TextScramble";
 import { KineticMarquee } from "@/components/shared/KineticMarquee";
+import { GeometricWireframes } from "@/components/shared/GeometricWireframes";
 
 export function HeroSection() {
   return (
@@ -24,10 +25,22 @@ export function HeroSection() {
 
         {/* Layer 3: Floating asterisk/star decorations */}
         <FloatingAsterisks count={14} />
+
+        {/* Layer 4: Geometric Wireframes */}
+        <GeometricWireframes />
       </div>
 
       {/* === DECORATIVE ASTERISKS (strategic placement) === */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        {/* Massive Solid Asterisk Background */}
+        <motion.div
+          className="absolute top-[10%] -right-[10%] opacity-5 text-text-primary z-0 hidden md:block select-none font-sans"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
+        >
+          <span style={{ fontSize: '50rem', lineHeight: 1 }}>⁕</span>
+        </motion.div>
+
         {/* Top-right decorative asterisk */}
         <motion.div
           className="absolute top-28 right-[8%] hidden lg:block"
@@ -130,7 +143,7 @@ export function HeroSection() {
               </span>
             </motion.div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -169,7 +182,7 @@ export function HeroSection() {
               className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold tracking-tighter leading-[0.85] text-text-primary uppercase block"
             />
           </motion.div>
-          
+
           {/* "Engineer" heading */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
@@ -203,7 +216,7 @@ export function HeroSection() {
 
         {/* Bottom Content Row */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -214,7 +227,7 @@ export function HeroSection() {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
