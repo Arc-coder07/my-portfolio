@@ -12,8 +12,26 @@ export function FeaturedProjects() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section className="py-24 sm:py-32 border-t border-border bg-bg-secondary/30 relative">
-      <div className="max-w-[1000px] mx-auto px-6">
+    <section className="py-24 sm:py-32 border-t border-border bg-bg-secondary/30 relative overflow-hidden">
+      {/* Moving Marquee Banner */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden border-b border-border/40 bg-bg-primary/40 py-3 backdrop-blur-sm z-0">
+        <div className="flex whitespace-nowrap w-max animate-[marquee-left_30s_linear_infinite]">
+          {[...Array(8)].map((_, i) => (
+            <span key={i} className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.3em] text-text-tertiary uppercase flex items-center">
+              <span className="mx-6">Featured Work</span>
+              <span className="text-accent/60">⁕</span>
+              <span className="mx-6">Creative Engineering</span>
+              <span className="text-accent/60">⁕</span>
+              <span className="mx-6">AI Systems</span>
+              <span className="text-accent/60">⁕</span>
+              <span className="mx-6">Product Design</span>
+              <span className="text-accent/60">⁕</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-[1000px] mx-auto px-6 relative z-10">
         <SectionReveal>
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-16 gap-6">
             <div>

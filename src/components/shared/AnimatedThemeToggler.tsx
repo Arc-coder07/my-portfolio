@@ -136,12 +136,15 @@ export const AnimatedThemeToggler = ({
 }: AnimatedThemeTogglerProps) => {
   const shape = variant ?? "circle"
   const { setTheme, resolvedTheme } = useTheme()
-  const [isDark, setIsDark] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    setIsDark(resolvedTheme === "dark")
-  }, [resolvedTheme])
+    const timeout = setTimeout(() => setMounted(true), 0)
+    return () => clearTimeout(timeout)
+  }, [])
+
+  const isDark = mounted ? resolvedTheme === "dark" : false
 
   const toggleTheme = useCallback(() => {
     const button = buttonRef.current

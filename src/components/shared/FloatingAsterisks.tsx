@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const GLYPHS = ["✦", "✽", "✳", "＊", "✵", "⁂", "※"];
@@ -21,21 +21,24 @@ export function FloatingAsterisks({ count = 12 }: { count?: number }) {
   const [glyphs, setGlyphs] = useState<FloatingGlyph[]>([]);
 
   useEffect(() => {
-    const generated: FloatingGlyph[] = [];
-    for (let i = 0; i < count; i++) {
-      generated.push({
-        id: i,
-        glyph: GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
-        x: 5 + Math.random() * 90,
-        y: 5 + Math.random() * 90,
-        size: 0.6 + Math.random() * 1.8,
-        rotation: Math.random() * 360,
-        duration: 6 + Math.random() * 10,
-        delay: Math.random() * 5,
-        floatRange: 8 + Math.random() * 20,
-      });
-    }
-    setGlyphs(generated);
+    const timeout = setTimeout(() => {
+      const generated: FloatingGlyph[] = [];
+      for (let i = 0; i < count; i++) {
+        generated.push({
+          id: i,
+          glyph: GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
+          x: 5 + Math.random() * 90,
+          y: 5 + Math.random() * 90,
+          size: 0.6 + Math.random() * 1.8,
+          rotation: Math.random() * 360,
+          duration: 6 + Math.random() * 10,
+          delay: Math.random() * 5,
+          floatRange: 8 + Math.random() * 20,
+        });
+      }
+      setGlyphs(generated);
+    }, 0);
+    return () => clearTimeout(timeout);
   }, [count]);
 
   return (

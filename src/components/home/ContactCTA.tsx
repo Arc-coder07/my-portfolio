@@ -39,7 +39,7 @@ export function ContactCTA() {
       {/* Interactive Dither Background */}
       <div className="absolute inset-0 -z-10 bg-bg-primary opacity-60">
         <Dither
-          waveColor={[0.2, 0.4, 0.8]} 
+          waveColor={[0.36, 0.2, 0.9]} 
           disableAnimation={false}
           enableMouseInteraction={true}
           mouseRadius={0.4}

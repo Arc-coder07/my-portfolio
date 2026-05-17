@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 interface PulseLine {
@@ -15,16 +15,19 @@ export function BlueprintGrid() {
 
   useEffect(() => {
     // Generate random pulse lines on mount
-    const lines: PulseLine[] = [];
-    for (let i = 0; i < 6; i++) {
-      lines.push({
-        id: i,
-        type: i % 2 === 0 ? "horizontal" : "vertical",
-        position: 15 + Math.random() * 70, // keep within 15-85% range
-        delay: Math.random() * 8,
-      });
-    }
-    setPulseLines(lines);
+    const timeout = setTimeout(() => {
+      const lines: PulseLine[] = [];
+      for (let i = 0; i < 6; i++) {
+        lines.push({
+          id: i,
+          type: i % 2 === 0 ? "horizontal" : "vertical",
+          position: 15 + Math.random() * 70, // keep within 15-85% range
+          delay: Math.random() * 8,
+        });
+      }
+      setPulseLines(lines);
+    }, 0);
+    return () => clearTimeout(timeout);
   }, []);
 
   return (
