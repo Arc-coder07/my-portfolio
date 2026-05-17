@@ -221,7 +221,7 @@ export default async function ProjectPage({ params }: PageProps) {
             <ArrowLeft size={14} />
             All Projects
           </Link>
-          <Button href="/contact" variant="primary" size="sm">
+          <Button href="/#contact" variant="primary" size="sm">
             Get in Touch
           </Button>
         </div>

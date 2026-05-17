@@ -1,148 +1,115 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SectionReveal } from "@/components/shared/SectionReveal";
-import { Badge } from "@/components/shared/Badge";
 import { getFeaturedProjects, categoryLabels } from "@/lib/projects";
-import { SpotlightCard } from "@/components/shared/SpotlightCard";
+import { useState } from "react";
 
 export function FeaturedProjects() {
   const featured = getFeaturedProjects();
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section className="py-28 sm:py-32">
-      <div className="max-w-[1280px] mx-auto px-6">
-        {/* Section Header */}
+    <section className="py-24 sm:py-32 border-t border-border bg-bg-secondary/30 relative">
+      <div className="max-w-[1000px] mx-auto px-6">
         <SectionReveal>
-          <div className="flex items-end justify-between mb-16">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-16 gap-6">
             <div>
-              <span className="text-accent text-sm font-semibold uppercase tracking-wider">
-                Featured Work
+              <span className="text-accent text-xs font-mono font-bold tracking-[0.2em] uppercase mb-4 block">
+                Selected Work
               </span>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
-                Projects I&apos;ve built
+              <h2 className="text-4xl sm:text-5xl font-black tracking-tighter text-text-primary">
+                Featured <span className="text-text-muted italic font-serif font-light tracking-normal">Projects</span>
               </h2>
-              <p className="mt-3 text-text-secondary max-w-lg">
-                End-to-end products — from system architecture to deployed application.
-                Each one is a deep dive into engineering decisions.
-              </p>
             </div>
             <Link
               href="/projects"
-              className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary hover:text-accent transition-colors pb-1 border-b-2 border-text-primary hover:border-accent"
             >
-              View all projects
-              <ArrowUpRight size={14} />
+              View full archive
+              <ArrowUpRight size={16} />
             </Link>
           </div>
         </SectionReveal>
 
-        {/* Project Cards */}
-        <div className="space-y-8">
+        {/* List Layout - Refined & Compact Minimalist Approach */}
+        <div className="flex flex-col border-t-2 border-border/80">
           {featured.map((project, index) => (
-            <SectionReveal key={project.slug} delay={index * 0.1}>
+            <SectionReveal key={project.slug} delay={index * 0.05}>
               <Link href={`/projects/${project.slug}`}>
-                <SpotlightCard className="group relative grid grid-cols-1 lg:grid-cols-2 gap-0 hover:border-border-accent hover:shadow-lg transition-all duration-300">
-                  {/* Project Visual */}
-                  <div
-                    className="relative aspect-[16/10] lg:aspect-auto bg-bg-tertiary flex items-center justify-center overflow-hidden border-b lg:border-b-0 lg:border-r border-border"
+                <div 
+                  className="group relative flex flex-col md:flex-row md:items-center justify-between py-10 md:py-12 border-b border-border/80 hover:bg-bg-primary transition-all duration-500 px-6 -mx-6 rounded-2xl"
+                  onMouseEnter={() => setHoveredIdx(index)}
+                  onMouseLeave={() => setHoveredIdx(null)}
+                >
+                  {/* Left side: Index & Title */}
+                  <div className="flex-1 md:pr-8 z-10 relative">
+                    <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 mb-3 md:mb-0">
+                      <span className="text-text-tertiary font-mono text-sm font-semibold tracking-widest">
+                        0{index + 1}
+                      </span>
+                      <h3 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary group-hover:-translate-y-1 group-hover:text-accent transition-all duration-300">
+                        {project.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Middle: Details */}
+                  <div className="hidden md:flex flex-1 flex-col items-start px-8 z-10 relative border-l border-border/50 pl-8">
+                    <p className="text-text-secondary text-sm leading-relaxed mb-4">
+                      {project.tagline}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.techStack.slice(0, 3).map((tech) => (
+                        <span key={tech} className="text-[10px] font-mono text-text-tertiary uppercase tracking-wider px-2 py-1 rounded bg-bg-secondary border border-border">
+                          {tech}
+                        </span>
+                      ))}
+                      {project.techStack.length > 3 && (
+                        <span className="text-[10px] font-mono text-text-tertiary uppercase tracking-wider px-2 py-1 rounded bg-bg-secondary border border-border">
+                          +{project.techStack.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Right side: Category & Link */}
+                  <div className="flex items-center justify-between md:justify-end gap-6 mt-8 md:mt-0 md:w-32 text-right shrink-0 z-10 relative">
+                    <span className="text-xs font-mono font-medium text-text-tertiary md:hidden tracking-wider uppercase">
+                      {categoryLabels[project.category]}
+                    </span>
+                    
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full border border-border group-hover:bg-accent group-hover:border-accent group-hover:text-white transition-all duration-300 ml-auto bg-bg-primary text-text-primary">
+                      <ArrowUpRight size={20} className="group-hover:rotate-45 transition-transform duration-300" />
+                    </div>
+                  </div>
+                  
+                  {/* Floating Image Preview (Desktop only) */}
+                  <div 
+                    className="hidden lg:block absolute z-0 pointer-events-none w-[320px] h-[200px] left-1/2 top-1/2 rounded-xl overflow-hidden shadow-2xl transition-all duration-500 ease-out will-change-transform"
                     style={{
-                      background: !project.image 
-                        ? `linear-gradient(135deg, ${project.color}10, ${project.color}05)`
-                        : undefined,
+                      opacity: hoveredIdx === index ? 1 : 0,
+                      transform: hoveredIdx === index 
+                        ? 'translate(-50%, -50%) scale(1) rotate(2deg)' 
+                        : 'translate(-50%, -40%) scale(0.95) rotate(0deg)',
                     }}
                   >
                     {project.image ? (
-                      <img
-                        src={project.image}
-                        alt={`${project.title} preview`}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
+                      <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
                     ) : (
-                      /* Placeholder visual — geometric shapes */
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        <div
-                          className="w-32 h-32 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity"
-                          style={{ backgroundColor: project.color }}
-                        />
-                        <div
-                          className="absolute w-24 h-24 rounded-xl opacity-15 rotate-12 group-hover:rotate-6 transition-transform"
-                          style={{ backgroundColor: project.color }}
-                        />
-                        <div
-                          className="absolute w-16 h-16 rounded-lg opacity-10 -rotate-12 group-hover:-rotate-6 transition-transform"
-                          style={{ backgroundColor: project.color }}
-                        />
-                        {/* Project title overlay */}
-                        <span
-                          className="absolute text-5xl font-black opacity-[0.06] select-none"
-                          style={{ color: project.color }}
-                        >
-                          {project.title}
-                        </span>
+                      <div className="w-full h-full bg-accent/20 flex items-center justify-center">
+                        <span className="font-black text-2xl opacity-30 text-accent">{project.title}</span>
                       </div>
                     )}
-
-                    {/* Category badge */}
-                    <div className="absolute top-4 left-4 z-10">
-                      <Badge variant="category">{categoryLabels[project.category]}</Badge>
-                    </div>
-                    
-                    {/* Overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 border border-white/10 rounded-xl" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-50" />
                   </div>
-
-                  {/* Project Info */}
-                  <div className="p-8 lg:p-10 flex flex-col justify-center">
-                    <h3 className="text-2xl font-bold tracking-tight text-text-primary group-hover:text-accent transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 text-text-secondary leading-relaxed">
-                      {project.tagline}
-                    </p>
-
-                    {/* Metrics */}
-                    <div className="mt-6 grid grid-cols-3 gap-3">
-                      {project.metrics.map((metric) => (
-                        <div key={metric.label} className="text-center p-3 rounded-lg bg-bg-primary border border-border-subtle">
-                          <p className="text-sm font-semibold text-text-primary">{metric.value}</p>
-                          <p className="text-xs text-text-tertiary mt-0.5">{metric.label}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Tech stack */}
-                    <div className="mt-6 flex flex-wrap gap-1.5">
-                      {project.techStack.slice(0, 5).map((tech) => (
-                        <Badge key={tech} variant="tech">{tech}</Badge>
-                      ))}
-                      {project.techStack.length > 5 && (
-                        <Badge variant="outline">+{project.techStack.length - 5}</Badge>
-                      )}
-                    </div>
-
-                    {/* CTA */}
-                    <div className="mt-8 flex items-center gap-2 text-sm font-medium text-accent group-hover:gap-3 transition-all">
-                      View Case Study
-                      <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </div>
-                  </div>
-                </SpotlightCard>
+                </div>
               </Link>
             </SectionReveal>
           ))}
-        </div>
-
-        {/* Mobile "view all" link */}
-        <div className="mt-8 sm:hidden text-center">
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
-          >
-            View all projects
-            <ArrowUpRight size={14} />
-          </Link>
         </div>
       </div>
     </section>

@@ -117,7 +117,7 @@ export default function AboutPage() {
               Whether it&apos;s a full-time role, freelance project, or just a
               conversation about AI systems — I&apos;d love to connect.
             </p>
-            <Button href="/contact" variant="primary" iconRight={<ArrowRight size={14} />}>
+            <Button href="/#contact" variant="primary" iconRight={<ArrowRight size={14} />}>
               Get in Touch
             </Button>
           </div>

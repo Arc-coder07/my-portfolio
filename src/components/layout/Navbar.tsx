@@ -12,7 +12,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -87,7 +87,7 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             {/* Resume CTA (desktop only) */}
             <Link
-              href="/contact"
+              href="/#contact"
               className="hidden md:inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-accent hover:bg-accent-hover rounded-lg transition-all hover:shadow-[var(--shadow-glow)]"
             >
               Get in Touch
@@ -141,7 +141,7 @@ export function Navbar() {
                 );
               })}
               <Link
-                href="/contact"
+                href="/#contact"
                 className="mt-2 px-4 py-3 text-sm font-medium text-white bg-accent hover:bg-accent-hover rounded-lg text-center transition-all"
               >
                 Get in Touch
